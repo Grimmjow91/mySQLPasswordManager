@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainGUIController">
+   <children>
+      <MenuBar fx:id="mnuBar" prefHeight="25.0" prefWidth="1034.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <Menu mnemonicParsing="false" text="New">
+                    <items>
+                    <MenuItem fx:id="mnuNewPassword" mnemonicParsing="false" text="New Password" />
+                      <MenuItem fx:id="mnuNewUser" mnemonicParsing="false" text="New User" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Import">
+                    <items>
+                      <MenuItem fx:id="mnuImportUsers" mnemonicParsing="false" text="Import Users" />
+                        <MenuItem fx:id="mnuImportPasswords" mnemonicParsing="false" text="Import Passwords" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="mnuExportPasswords" mnemonicParsing="false" text="Export Passwords" />
+            </items>
+          </Menu>
+            <Menu fx:id="mnuTools" mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem fx:id="mnuPasswordGen" mnemonicParsing="false" text="Password Generator" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

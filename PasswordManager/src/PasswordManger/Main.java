@@ -1,4 +1,4 @@
-package sample;
+package PasswordManger;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

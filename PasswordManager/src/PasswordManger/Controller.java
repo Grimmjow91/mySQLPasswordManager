@@ -1,4 +1,4 @@
-package sample;
+package PasswordManger;
 
 public class Controller {
 }
