@@ -4,8 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PasswordManager.MainGUIController">
    <children>
       <MenuBar fx:id="mnuBar" prefHeight="25.0" prefWidth="1034.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -45,5 +44,29 @@
           </Menu>
         </menus>
       </MenuBar>
+      <SplitPane layoutX="1.0" layoutY="28.0" prefHeight="754.0" prefWidth="1026.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane fx:id="spPane" dividerPositions="0.5009784735812133" layoutX="319.0" layoutY="153.0" prefHeight="752.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Button fx:id="btnFull" layoutX="120.0" layoutY="84.0" mnemonicParsing="false" onAction="#MakeFull" text="Full" />
+                              <Button fx:id="btnHalf" layoutX="110.0" layoutY="190.0" mnemonicParsing="false" onAction="#MakeHalf" text="half" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="lblHello" layoutX="135.0" layoutY="47.0" text="Hello" />
+                              <TextField fx:id="txtArea" layoutX="81.0" layoutY="155.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>
