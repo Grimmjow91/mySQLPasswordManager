@@ -13,12 +13,12 @@ package PasswordManager;
  */
 
 
-public class DataConnectionInfo {
+public class DatabaseConnectionInfo {
     private String user;
     private String pass;
     private String URL;
 
-    public DataConnectionInfo(String user, String pass, String URL) {
+    public DatabaseConnectionInfo(String user, String pass, String URL) {
         this.user = user;
         this.pass = pass;
         this.URL = URL;
