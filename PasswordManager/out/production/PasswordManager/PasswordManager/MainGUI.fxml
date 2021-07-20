@@ -23,6 +23,7 @@
                     <items>
                       <MenuItem fx:id="mnuImportUsers" mnemonicParsing="false" text="Import Users" />
                         <MenuItem fx:id="mnuImportPasswords" mnemonicParsing="false" text="Import Passwords" />
+                        <MenuItem fx:id="mnuImportDatabase" mnemonicParsing="false" onAction="#HandlemnuImportDatabase" text="Import Database Connection File" />
                     </items>
                   </Menu>
                   <MenuItem fx:id="mnuExportPasswords" mnemonicParsing="false" text="Export Passwords" />
