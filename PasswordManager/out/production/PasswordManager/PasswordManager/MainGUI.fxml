@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -48,18 +49,17 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <SplitPane fx:id="spPane" dividerPositions="0.5009784735812133" layoutX="319.0" layoutY="153.0" prefHeight="752.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane fx:id="spPane" dividerPositions="0.49902152641878667" layoutX="319.0" layoutY="153.0" prefHeight="752.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="503.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1.0">
                            <children>
-                              <Button fx:id="btnFull" layoutX="120.0" layoutY="84.0" mnemonicParsing="false" onAction="#MakeFull" text="Full" />
-                              <Button fx:id="btnHalf" layoutX="110.0" layoutY="190.0" mnemonicParsing="false" onAction="#MakeHalf" text="half" />
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <Label fx:id="lblHello" layoutX="135.0" layoutY="47.0" text="Hello" />
-                              <TextField fx:id="txtArea" layoutX="81.0" layoutY="155.0" />
+                              <Label fx:id="lblEmail" layoutX="65.0" layoutY="222.0" text="Email: " />
+                              <Label fx:id="lblLogin" layoutX="65.0" layoutY="274.0" text="Login:" />
+                              <Label fx:id="lblPassword" layoutX="65.0" layoutY="322.0" text="Password:" />
+                              <Label fx:id="lblWebsite" layoutX="67.0" layoutY="381.0" text="Website: " />
+                              <Label fx:id="lblName" layoutX="65.0" layoutY="430.0" text="Name:" />
+                              <Label fx:id="lblNotes" layoutX="65.0" layoutY="481.0" text="Notes:" />
                            </children>
                         </AnchorPane>
                     </items>
