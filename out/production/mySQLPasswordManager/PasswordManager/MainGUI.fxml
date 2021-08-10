@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="788.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PasswordManager.MainGUIController">
+   <children>
+      <MenuBar fx:id="mnuBar" prefHeight="25.0" prefWidth="1034.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <Menu mnemonicParsing="false" text="New">
+                    <items>
+                    <MenuItem fx:id="mnuNewPassword" mnemonicParsing="false" text="New Password" />
+                      <MenuItem fx:id="mnuNewUser" mnemonicParsing="false" text="New User" />
+                        <MenuItem fx:id="mnuNewGroup" mnemonicParsing="false" text="New Group" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Import">
+                    <items>
+                      <MenuItem fx:id="mnuImportUsers" mnemonicParsing="false" text="Import Users" />
+                        <MenuItem fx:id="mnuImportPasswords" mnemonicParsing="false" text="Import Passwords" />
+                        <MenuItem fx:id="mnuImportDatabase" mnemonicParsing="false" onAction="#HandlemnuImportDatabase" text="Import Database Connection File" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="mnuExportPasswords" mnemonicParsing="false" text="Export Passwords" />
+                  <MenuItem fx:id="mnuQuit" mnemonicParsing="false" text="Quit" />
+            </items>
+          </Menu>
+            <Menu fx:id="mnuTools" mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem fx:id="mnuPasswordGen" mnemonicParsing="false" text="Password Generator" />
+                  <MenuItem fx:id="mnuPasswordHIstory" mnemonicParsing="false" text="Password History" />
+                  <MenuItem fx:id="mnuSettings" mnemonicParsing="false" text="Settings" />
+                  <MenuItem fx:id="mnuUserMan" mnemonicParsing="false" text="User Management" />
+                  <MenuItem fx:id="mnuGroupMan" mnemonicParsing="false" text="Group Management" />
+                  <MenuItem fx:id="mnuPasswordMan" mnemonicParsing="false" text="Password Management" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane layoutX="1.0" layoutY="28.0" prefHeight="754.0" prefWidth="1026.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane fx:id="spPane" dividerPositions="0.49902152641878667" layoutX="319.0" layoutY="153.0" prefHeight="752.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="503.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1.0">
+                           <children>
+                              <Label fx:id="lblEmail" layoutX="65.0" layoutY="222.0" text="Email: " />
+                              <Label fx:id="lblLogin" layoutX="65.0" layoutY="274.0" text="Login:" />
+                              <Label fx:id="lblPassword" layoutX="65.0" layoutY="322.0" text="Password:" />
+                              <Label fx:id="lblWebsite" layoutX="67.0" layoutY="381.0" text="Website: " />
+                              <Label fx:id="lblName" layoutX="65.0" layoutY="430.0" text="Name:" />
+                              <Label fx:id="lblNotes" layoutX="65.0" layoutY="481.0" text="Notes:" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

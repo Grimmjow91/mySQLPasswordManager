@@ -1,8 +1,16 @@
 package PasswordManager;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * file: DatabaseConnectionManagement
@@ -37,7 +45,8 @@ import java.util.Scanner;
         if (!issue){
             information = reader.nextLine().split("\t");
             return new DatabaseConnectionInfo(information[data.user], information[data.pass],
-                    information[data.URL]);
+                    information[data.IPandPort], information[data.databaseName]);
+
         }
         else
         {
@@ -47,21 +56,56 @@ import java.util.Scanner;
 
 
      }
+
+    /**
+     *
+     * This method is going to write the connection information to the hard drive so the program can use it later.
+     * It will call the encryption method as well.
+     * @param data this is the connection information object that is being written to the hard drive.
+     */
+     protected static void writeToFile(DatabaseConnectionInfo data){
+         File file = new File("config.bin");
+         try {
+             FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos);
+             file.createNewFile();
+             oos.writeObject(data);
+             oos.flush();
+             oos.close();
+             fos.close();
+             encryptFile(file, "NotThePermaPassword");
+         } catch (IOException e) {
+             System.out.println("Error creating connection file: " +e.toString());
+             e.printStackTrace();
+         }
+
+
+     }
+
+     protected static void encryptFile(File file, String key) {
+         File encryptedFile = new File("config.ebin");
+
+     }
+
 }
 
+
+
 /**
- * this class exits just for the sake of readablity when it comes to the reading in
+ * this class exists just for the sake of readablity when it comes to the reading in
  * data connection information from a file. It makes it so it used the data names instead
  * of the numbers.
  * Variables:
  *      User - this is going to be the position of the username in the array
  *      Pass - this is the position of the password in the array
  *      URL - this is the position of the URL in the array.
+ *      databaseName - this is the position of the name of the database.
  */
  class readData{
     final int user = 0;
     final int pass = 1;
-    final int URL = 2;
+    final int IPandPort = 2;
+    final int databaseName = 3;
 }
 
 
