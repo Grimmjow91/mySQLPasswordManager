@@ -6,12 +6,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+/**      DatabaseConnectionInfo testing =
+        DatabaseConnectionManagement.decryptFile("NotThePermaPassword");
+        try {
+            System.out.println(testing.getDatabaseName());
+        }catch (Exception e){
+            System.out.println("wat");
+            System.out.println(e.toString());
+        }*/
+
         Parent root = FXMLLoader.load(getClass().getResource("MainGUI.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Password Manager");
         primaryStage.setScene(new Scene(root, 1034, 788));
         primaryStage.show();
     }
@@ -20,13 +31,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        System.out.println(giveText("taco"));
-    }
-
-    public static String giveText(String stuff) {
-        String something= stuff.concat(" Hi");
-
-        return something;
     }
 }
 

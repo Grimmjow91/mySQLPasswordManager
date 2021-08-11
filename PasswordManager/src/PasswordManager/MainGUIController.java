@@ -1,16 +1,26 @@
 package PasswordManager;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
-public class MainGUIController {
+import javax.swing.*;
+import java.io.File;
 
+public class MainGUIController{
+    DatabaseConnectionInfo data;
     @FXML
     private MenuItem mnuPasswordGen;
 
     @FXML
     private MenuItem mnuImportPasswords;
+
+    @FXML
+    private MenuItem mnuImportDatabase;
+
 
     @FXML
     private MenuItem mnuSettings;
@@ -37,7 +47,8 @@ public class MainGUIController {
     private Menu mnuTools;
 
     @FXML
-    private Button btnFull;
+    protected Button btnFull;
+
 
     @FXML
     private Label lblHello;
@@ -72,9 +83,27 @@ public class MainGUIController {
 
     }
 
+    /**
+     * this is the method that is going to cut the window in half to show the password information
+     * @param event this is the event information that javaFx sends.
+     */
     @FXML
     void MakeHalf(ActionEvent event) {
         spPane.setDividerPositions(.500,0);
     }
+
+    @FXML
+    void HandlemnuImportDatabase(ActionEvent event) {
+        Stage newStage = null;
+        final FileChooser fc = new FileChooser();
+        File file;
+        fc.setTitle("Pick Database Connection Information file");
+        file = fc.showOpenDialog(newStage);
+        if (file!= null) {
+            data = DatabaseConnectionManagement.importConnectionData(file);
+            DatabaseConnectionManagement.writeToFile(data);
+        }
+    }
+
 
 }
