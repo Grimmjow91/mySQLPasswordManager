@@ -1,10 +1,7 @@
 package PasswordManager;
 
-import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
+import java.io.Serializable;
 
 /**
  * File:DataConnectionInfo.java
@@ -22,7 +19,7 @@ import java.sql.Statement;
  */
 
 
-public class DatabaseConnectionInfo {
+public class DatabaseConnectionInfo implements Serializable {
     private String user;
     private String pass;
     private String URL;

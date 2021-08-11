@@ -83,6 +83,10 @@ public class MainGUIController{
 
     }
 
+    /**
+     * this is the method that is going to cut the window in half to show the password information
+     * @param event this is the event information that javaFx sends.
+     */
     @FXML
     void MakeHalf(ActionEvent event) {
         spPane.setDividerPositions(.500,0);
@@ -97,6 +101,7 @@ public class MainGUIController{
         file = fc.showOpenDialog(newStage);
         if (file!= null) {
             data = DatabaseConnectionManagement.importConnectionData(file);
+            DatabaseConnectionManagement.writeToFile(data);
         }
     }
 

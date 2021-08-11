@@ -7,11 +7,10 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -60,8 +59,34 @@ public class CryptoUtils {
             throw new CryptoException("Error encrypting/decrypting file", ex);
         }
     }
+
+    /**
+     * This method is used to hash the password a user enters.
+     * I got it from this website:
+     * https://medium.com/@kasunpdh/how-to-store-passwords-securely-with-pbkdf2-204487f14e84
+     * other important information:
+     * https://security.stackexchange.com/questions/38828/how-can-i-securely-convert-a-string-password-to-a-key-used-in-aes
+     * @param password this is the password that the user is entering
+     * @param salt this is the salt that is going to be applied to the password.
+     * @param iterations this is how many times you want the hashing algorithm to run
+     * @param keyLength this is how long you want to hash to be.
+     * @return
+     */
+    public static byte[] hashPassword( final char[] password, final byte[] salt, final int iterations, final int keyLength ) {
+
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance( "PBKDF2WithHmacSHA512" );
+            PBEKeySpec spec = new PBEKeySpec( password, salt, iterations, keyLength );
+            SecretKey key = skf.generateSecret( spec );
+            byte[] res = key.getEncoded( );
+            return res;
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException e ) {
+            throw new RuntimeException( e );
+        }
 }
-class CryptoException extends Exception {
+
+
+static class CryptoException extends Exception {
 
     public CryptoException() {
     }
@@ -69,4 +94,5 @@ class CryptoException extends Exception {
     public CryptoException(String message, Throwable throwable) {
         super(message, throwable);
     }
+}
 }
