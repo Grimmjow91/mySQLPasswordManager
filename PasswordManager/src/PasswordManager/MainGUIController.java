@@ -66,7 +66,7 @@ public class MainGUIController{
     private MenuItem mnuImportUsers;
 
     @FXML
-    private MenuItem mnuPasswordHIstory;
+    private MenuItem mnuPasswordHistory;
 
     @FXML
     private MenuBar mnuBar;
@@ -77,33 +77,52 @@ public class MainGUIController{
     @FXML
     private TextField txtArea;
 
-    @FXML
-    void MakeFull(ActionEvent event) {
-       spPane.setDividerPositions(100,0);
-
-    }
-
     /**
-     * this is the method that is going to cut the window in half to show the password information
+     * This method is going to make the password selection pane full to hind
+     * the password information pane.
      * @param event this is the event information that javaFx sends.
      */
     @FXML
-    void MakeHalf(ActionEvent event) {
-        spPane.setDividerPositions(.500,0);
-    }
+    void MakeFull(ActionEvent event) {GUIControllerLibrary.MakeFull(event, spPane);}
 
+    /**
+     * this is the method that is going to cut the window in half to show the password information
+     * It calls another method that does the work.
+     * @param event this is the event information that javaFx sends.
+     */
+    @FXML
+    void MakeHalf(ActionEvent event) {GUIControllerLibrary.MakeHalf(event, spPane);}
+
+    /**
+     * This is going to handle importing the connection information for the database.
+     * @param event this is the event information that JavaFX sends.
+     */
     @FXML
     void HandlemnuImportDatabase(ActionEvent event) {
-        Stage newStage = null;
-        final FileChooser fc = new FileChooser();
-        File file;
-        fc.setTitle("Pick Database Connection Information file");
-        file = fc.showOpenDialog(newStage);
+        File file = filePicker("Pick Database Connection Information file");
         if (file!= null) {
             data = DatabaseConnectionManagement.importConnectionData(file);
             DatabaseConnectionManagement.writeToFile(data);
         }
     }
 
+    @FXML
+    void ImportPasswords(ActionEvent event){
+    File file = filePicker("Pick a file Containing Passwords");
+
+    }
+
+    /**
+     * this is the method that is going to handle shoing the
+     * @return
+     */
+    public File filePicker(String title){
+        Stage newStage = null;
+        final FileChooser fc = new FileChooser();
+        File file;
+        fc.setTitle(title);
+        file = fc.showOpenDialog(newStage);
+        return file;
+    }
 
 }

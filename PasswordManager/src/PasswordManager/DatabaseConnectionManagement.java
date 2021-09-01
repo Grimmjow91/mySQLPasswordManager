@@ -139,6 +139,11 @@ import java.util.Scanner;
          return connection;
      }
 
+    /**
+     * This reads the file to pull back the Database connection object from the file.
+     * @param file this is the file that has the binary of the database connection object.
+     * @return It will return the database connection object, or null if there was an issue. 
+     */
      protected static DatabaseConnectionInfo readFile(File file){
          DatabaseConnectionInfo connection;
         try {
