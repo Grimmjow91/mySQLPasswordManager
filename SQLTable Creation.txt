@@ -1,0 +1,66 @@
+create table UsersTable(
+    TUID INT AUTO_INCREMENT,
+    UserName VarChar(25) NOT null,
+    FirstName varChar(25) not null,
+    LastName VarChar(25) not null,
+    HashPassword varChar(30) not null, 
+    Salt varchar(30) not null,
+    PermissionLevel boolean not null,
+    activeFlag boolean not null,
+    PRIMARY key(TUID)
+);
+
+create table PasswordsTable (
+	TUID int AUTO_INCREMENT,
+	PasswordObject varchar(300) not null,
+    activeFlag boolean not null,
+    PRIMARY key(TUID)
+);
+
+create table GroupTable (
+	TUID int AUTO_INCREMENT,
+    GroupName VarChar(25) not null,
+    ActiveFlag boolean not null,
+    PRIMARY key(TUID) 
+);
+
+create table ChangeTable(
+	TUID int AUTO_INCREMENT,
+    PasswordID Int not null,
+    UserID int not null, 
+    WhatChange varChar(60)not null, 
+    DateChanged date not null,
+    Primary key(TUID),
+    FOREIGN Key(PasswordID) REFERENCES PasswordsTable(TUID),
+    FOREIGN key(UserID) REFERENCES UsersTable(TUID)
+);
+
+create table GroupUsersTable(
+	TUID int AUTO_INCREMENT,
+    GroupID int not null,
+    UserID int not null,
+    PRIMARY key(TUID),
+  	FOREIGN key(GroupID) REFERENCES GroupTable(TUID)
+    	on DELETE CASCADE,
+    FOREIGN KEY(userID) REFERENCES UsersTable(tuid)
+    	on DELETE CASCADE
+);
+
+create table GroupPasswordsTable(
+	TUID int AUTO_INCREMENT,
+    GroupID int not null,
+    PasswordID int not null,
+    PRIMARY key(tuid),
+    FOREIGN key(groupID) REFERENCES GroupTable(TUID) 
+    	on delete CASCADE,
+    FOREIGN KEY(PasswordID) REFERENCES PasswordsTable(TUID)
+);
+
+Create table PasswordUserTable(
+	TUID int AUTO_INCREMENT,
+    UserID int not null,
+    PasswordID int not null,
+    primary key(TUID),
+    FOREIGN key(UserID) REFERENCES UsersTable(TUID),
+    FOREIGN key(PasswordID) REFERENCES PasswordsTable(TUID)
+);

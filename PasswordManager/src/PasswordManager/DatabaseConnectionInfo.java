@@ -2,6 +2,8 @@ package PasswordManager;
 
 
 import java.io.Serializable;
+import java.sql.*;
+import java.util.Scanner;
 
 /**
  * File:DataConnectionInfo.java
@@ -16,10 +18,12 @@ import java.io.Serializable;
  * URL this is the connection string that is used to access teh database. It will look something
  *      like "jdbc:mysql://ipaddress:3306/DatabaseName";
  * DatabaseName - this is the name of the database on the MySQL server.
+ * useStatement - this is the state that adds the using databaseName String
  */
 
 
 public class DatabaseConnectionInfo implements Serializable {
+    private static final long serialVersionUID = 1485784584697548685L;
     private String user;
     private String pass;
     private String URL;
@@ -28,8 +32,9 @@ public class DatabaseConnectionInfo implements Serializable {
     public DatabaseConnectionInfo(String user, String pass, String IPandPort, String Database) {
         this.user = user;
         this.pass = pass;
-        this.URL = "jdbc:mysql://" +IPandPort+"/";
+        this.URL = "jdbc:mysql://" +IPandPort+"/" + Database;
         this.DatabaseName = Database;
+
     }
 
     /**
@@ -65,5 +70,39 @@ public class DatabaseConnectionInfo implements Serializable {
         return DatabaseName;
     }
 
-}
+
+
+    public void excuteUpdate(String command){
+        try {
+            Connection connection = DriverManager.getConnection(URL,user, pass);
+            Statement statement = connection.createStatement();
+            statement.execute(command);
+        }catch (Exception ex){
+            displayIssue(ex);
+            ErrorMessage.infoBox(command, "MySQL Statement");
+            ex.printStackTrace();
+        }
+    }
+
+    public ResultSet executeSelect(String command){
+        ResultSet result = null;
+        try {
+            Connection connection = DriverManager.getConnection(URL,user, pass);
+            Statement statement = connection.createStatement();
+            result = statement.executeQuery(command);
+
+        }catch (Exception ex){
+            displayIssue(ex);
+            ErrorMessage.infoBox(command, "MySQL Statement");
+            ex.printStackTrace();
+        }
+        return result;
+
+    }
+    public void displayIssue(Exception ex){
+        ErrorMessage.infoBox("Bad Sql statement/n" + ex.toString(), "SQL Error");
+    }
+}//end of class
+
+
 
