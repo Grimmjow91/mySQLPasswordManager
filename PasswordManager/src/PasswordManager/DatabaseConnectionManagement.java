@@ -141,8 +141,12 @@ import java.util.Scanner;
 
     /**
      * This reads the file to pull back the Database connection object from the file.
+     * Variables:
+     *      connection - this is either the database connection object or null.
+     *      fis - this is the file input stream that reads in the file.
+     *      ois - this is the object input stream that allows us to see the stream as an object.
      * @param file this is the file that has the binary of the database connection object.
-     * @return It will return the database connection object, or null if there was an issue. 
+     * @return It will return the database connection object, or null if there was an issue.
      */
      protected static DatabaseConnectionInfo readFile(File file){
          DatabaseConnectionInfo connection;

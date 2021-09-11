@@ -11,6 +11,11 @@ import javax.xml.crypto.Data;
 
 public class DatabaseTableCreation {
 
+    /**
+     * this is the method that sets up the database.
+     * First it makes sure there are no tables and then it makes the tables.
+     * @param db this is the database connection object.
+     */
     public static void Setup(DatabaseConnectionInfo db){
         dropTables(db);
         makeTables(db);

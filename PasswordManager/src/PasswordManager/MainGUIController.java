@@ -99,26 +99,47 @@ public class MainGUIController{
      */
     @FXML
     void HandlemnuImportDatabase(ActionEvent event) {
-        File file = filePicker("Pick Database Connection Information file");
+        File file = filePicker("Pick Database Connection Information file","tab");
         if (file!= null) {
             data = DatabaseConnectionManagement.importConnectionData(file);
             DatabaseConnectionManagement.writeToFile(data);
         }
     }
 
+    /**
+     * This is going to start the importing of passwords, the passwords have to be in a
+     * command seperated file or a tab delimited file or it will fail.
+     * Variables:
+     *      file - this is the file that we are trying to import data from
+     *      extention - this is the files exention so we know what type of file it is.
+     * @param event this is the event information that JavaFX sends.
+     */
     @FXML
     void ImportPasswords(ActionEvent event){
-    File file = filePicker("Pick a file Containing Passwords");
+        File file = filePicker("Pick a file Containing Passwords","tab/csv");
+        String extention;
+        if (file!=null){
+            extention = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf(".")+1);
+            System.out.println(extention);
+            PasswordManagementMethods.readFile(file, extention);
 
+        }
     }
 
     /**
-     * this is the method that is going to handle shoing the
-     * @return
+     * this is the method that is going to handle choosing the file
+     * @return the file
      */
-    public File filePicker(String title){
+    public File filePicker(String title, String type){
         Stage newStage = null;
-        final FileChooser fc = new FileChooser();
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter;
+        if(type.equals("tab/csv")){
+            extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt) | CSV Files (*.csv) | JSON Files (*.json)", "*.txt" , "*.csv", "*.json");
+        } else{
+            extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        }
+        fc.getExtensionFilters().add(extensionFilter);
         File file;
         fc.setTitle(title);
         file = fc.showOpenDialog(newStage);
