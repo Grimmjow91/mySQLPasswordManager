@@ -1,5 +1,7 @@
 package PasswordManager;
 
+import java.io.Serializable;
+
 /**
  * File Name:PasswordProfile.java
  * @author Nathan Premo
@@ -18,7 +20,8 @@ package PasswordManager;
  *  strNotes - this is going to hold a string of any notes
  *      that might be saved about the password object
  */
-public class PasswordProfile {
+public class PasswordProfile implements Serializable {
+    private static final long serialVersionUID = 1465744587697948685L;
      private String strName;
      private String strPassword;
      private String strLogin;
