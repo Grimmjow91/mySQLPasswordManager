@@ -1,6 +1,7 @@
 package PasswordManager;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.Scanner;
@@ -101,6 +102,25 @@ public class DatabaseConnectionInfo implements Serializable {
     }
     public void displayIssue(Exception ex){
         ErrorMessage.infoBox("Bad Sql statement/n" + ex.toString(), "SQL Error");
+    }
+
+    public void uploadPassBlob(String passName, byte[] data){
+        //the logic for this was grabbed from https://coderanch.com/t/298565/databases/upload-byte-array-BLOB-column
+        //TODO finish the upload method
+        try {
+            Connection connection = DriverManager.getConnection(URL, user, pass);
+            String sql = "Insert into PasswordsTable (PasswordName, PasswordObject, ActiveFlag) Values(?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, passName);
+            statement.setBinaryStream(2, new ByteArrayInputStream(data), data.length);
+            statement.setInt(3,1);
+            statement.executeUpdate();
+
+        }catch (Exception ex){
+            displayIssue(ex);
+            ErrorMessage.infoBox("Error during password upload", "MySQL Statement");
+            ex.printStackTrace();
+        }
     }
 }//end of class
 

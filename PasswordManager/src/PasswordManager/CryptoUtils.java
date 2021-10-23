@@ -97,9 +97,9 @@ public class CryptoUtils {
      */
     private final static String HEX = "0123456789ABCDEF";
 
-    public static byte[] bEncrypt(String seed, byte[] cleartext)
+    public static byte[] bEncrypt(String password, byte[] cleartext)
             throws Exception {
-        byte[] rawKey = getRawKey(seed.getBytes());
+        byte[] rawKey = getRawKey(password.getBytes());
         byte[] result = bEncrypt(rawKey, cleartext);
         return result;
     }// ww w. jav a 2 s  . co m
@@ -143,9 +143,9 @@ public class CryptoUtils {
     }
 
 
-    public static byte[] bDecrypt(String raw, byte[] encrypted){
+    public static byte[] bDecrypt(String password, byte[] encrypted){
         try {
-            SecretKeySpec skeySpec = new SecretKeySpec(getRawKey(raw.getBytes(StandardCharsets.UTF_8)), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(getRawKey(password.getBytes(StandardCharsets.UTF_8)), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             byte[] decrypted = cipher.doFinal(encrypted);

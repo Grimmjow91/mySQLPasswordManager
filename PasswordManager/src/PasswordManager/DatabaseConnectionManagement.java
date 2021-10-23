@@ -78,6 +78,7 @@ import java.util.Scanner;
              oos.flush();
              oos.close();
              fos.close();
+             //TODO remove the references to the NotThePermaPassword
              encryptFile(file, "NotThePermaPassword");
          } catch (IOException e) {
              System.out.println("Error creating connection file: " +e.toString());
@@ -101,6 +102,7 @@ import java.util.Scanner;
          File encryptedFile = new File("config.ebin");
          try {
              encryptedFile.createNewFile();
+             //TODO change the way the encyption settings are.
              CryptoUtils.encrypt(new String(CryptoUtils.hashPassword(pass.toCharArray(),
                      ("testing").getBytes(StandardCharsets.UTF_8),1, 128)), file, encryptedFile);
          } catch (Exception e){
@@ -127,6 +129,7 @@ import java.util.Scanner;
          try{
              decryptedFile.createNewFile();
              //need to change the key into an AES key
+             //TODO change the way these encyprtion settings are
              CryptoUtils.decrypt(new String(CryptoUtils.hashPassword(pass.toCharArray(), ("testing").getBytes(StandardCharsets.UTF_8),1, 128)),
                      encryptedFile,decryptedFile);
              connection = readFile(decryptedFile);

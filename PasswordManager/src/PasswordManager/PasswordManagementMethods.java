@@ -1,15 +1,11 @@
 package PasswordManager;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.rmi.server.ExportException;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import org.json.*;
-
 
 
 /**
@@ -17,8 +13,11 @@ import org.json.*;
  * file: PasswordManager.PasswordImportMethods
  * This file is going to contain all the method that handle the managing of passwords.
  * including but not limited to, import, export, loading, updating, etc
- */
-public class PasswordManagementMethods {
+
+ * */
+public class PasswordManagementMethods{
+
+
 
     /**
      * This method is going to handle reading the the file that is going to be used for importing.
@@ -26,6 +25,8 @@ public class PasswordManagementMethods {
      * There is JSON Support but that is for exports from programs like dashlane and I make
      * no promises that it will work for any other JSON objects.
      * if it is a JSON object it will call a method to parse it.
+     * Varaibles
+     *      seperator - this is the delimiter for the files.
      * @param file this is the file we are reading in.
      * @param type this is the type of file, so either csv, or tab
      */
@@ -38,10 +39,11 @@ public class PasswordManagementMethods {
             case "csv": seperator = ",";
                 break;
             case "txt": seperator = "\t";
+            //This is for tabs
                 break;
         }
         if (!type.equals("json")){
-
+            //TODO create the parse for delimieted file like tab and CSV
         }
 
 
@@ -52,6 +54,9 @@ public class PasswordManagementMethods {
      * This is going to be the method that parese the json file
      * It is going to use the org.json library found here in the Needed Module folder
      * You can see how to use the library here: http://theoryapp.com/parse-json-in-java/
+     * Variables
+     *      json this is the string bulder that is going to be used to read in
+     *      files information so we can parse it.
      * @param file this is the json file that we are parsing.
      */
     public static void parseJson(File file){
@@ -86,43 +91,58 @@ public class PasswordManagementMethods {
     /**
      * this method is going to be what handle converting the passwords objects to binary,
      * encrypting them, and then sending them to the database.
+     * Varaibles
+     *      encryptedPasswords - this i sthe link list of the encrypted password
+     *      objects that is going to be uploaded to the server.
+     *
      * @param importing
      */
     public static void uploadPasswords(LinkedList<PasswordProfile> importing){
-        LinkedList<PasswordProfile> EncryptedPasswords = new LinkedList<PasswordProfile>();
-        DatabaseConnectionInfo testing =
-                DatabaseConnectionManagement.decryptFile("NotThePermaPassword");
-        String key = "P)6@rS=/J9K$js:r";
+        LinkedList<byte[]> encryptedPasswords = new LinkedList<byte[]>();
+        UploadPasswordsQueue passQueue = new UploadPasswordsQueue();
+        passQueue.start();
+        StringBuilder sb = new StringBuilder();
+        //TODO remove the references to the NotThePermaPassword
+        //TODO figure out a way to pass the database correctly
+
+
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         //convert to binary
         try {
             ObjectOutputStream oos = new ObjectOutputStream(bos);
-           byte[] encryptedImporting;
+            byte[] encryptedImporting;
             for (PasswordProfile password: importing) {
                 oos.writeObject(password);
-            }
-            oos.flush();
-            encryptedImporting = bos.toByteArray();
-            testing(encryptedImporting);
-             encryptedImporting = CryptoUtils.bEncrypt("TestingPassword", encryptedImporting);
-            testing(encryptedImporting);
+                oos.flush();
+                /**
+                 * TODO change the password for encrypting the passwords, make the team set the password early on
+                 *  when setting everything up. Make a config file for it that has to be supplied to each
+                 *  user.
+                 */
 
-             testing(CryptoUtils.bDecrypt("TestingPassword",encryptedImporting));
-            //encryption
-            System.out.println("taco");
+                passQueue.addPassObject(new queueObject(password.getStrName(),
+                        CryptoUtils.bEncrypt("TestingPassword",bos.toByteArray())));
+                oos.reset();
+                bos.reset();
+            }
+            passQueue.setQueueLoadingFinished(true);
+
+
+
 
         } catch (Exception ex){
-            ErrorMessage.infoBox("Error with object convertion", "Error in upload");
+            ErrorMessage.infoBox("Error with object convertion", "Error in upload prep");
             ex.printStackTrace();
         }
 
     }
-    public static void testing(byte[] stuff){
-        for (byte element: stuff
-             ) {System.out.print(element);
-        }
-        System.out.println("");
-    }
 
 
-}//end of class
+
+
+
+}//end of class PasswordManagementMethods
+
+
+
+

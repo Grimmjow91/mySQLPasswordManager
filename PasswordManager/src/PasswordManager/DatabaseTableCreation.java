@@ -79,7 +79,8 @@ public class DatabaseTableCreation {
     public static void MakePasswordsTable(DatabaseConnectionInfo db){
         String command = "create table PasswordsTable (\n" +
                 "\tTUID int AUTO_INCREMENT,\n" +
-                "\tPasswordObject varchar(300) not null,\n" +
+                "\tPasswordName varChar(100) not null, \n" +
+                "\tPasswordObject BLOB not null,\n" +
                 "    activeFlag boolean not null,\n" +
                 "    PRIMARY key(TUID)\n" +
                 ");";

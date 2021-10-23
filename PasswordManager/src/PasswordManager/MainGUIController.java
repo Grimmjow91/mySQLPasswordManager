@@ -131,6 +131,7 @@ public class MainGUIController{
      * @return the file
      */
     public File filePicker(String title, String type){
+        //TODO need to work a way to delete the import file in for added security.
         Stage newStage = null;
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter;
