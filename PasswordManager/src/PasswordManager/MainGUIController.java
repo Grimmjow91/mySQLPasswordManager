@@ -66,7 +66,7 @@ public class MainGUIController{
     private MenuItem mnuImportUsers;
 
     @FXML
-    private MenuItem mnuPasswordHIstory;
+    private MenuItem mnuPasswordHistory;
 
     @FXML
     private MenuBar mnuBar;
@@ -77,33 +77,74 @@ public class MainGUIController{
     @FXML
     private TextField txtArea;
 
-    @FXML
-    void MakeFull(ActionEvent event) {
-       spPane.setDividerPositions(100,0);
-
-    }
-
     /**
-     * this is the method that is going to cut the window in half to show the password information
+     * This method is going to make the password selection pane full to hind
+     * the password information pane.
      * @param event this is the event information that javaFx sends.
      */
     @FXML
-    void MakeHalf(ActionEvent event) {
-        spPane.setDividerPositions(.500,0);
-    }
+    void MakeFull(ActionEvent event) {GUIControllerLibrary.MakeFull(event, spPane);}
 
+    /**
+     * this is the method that is going to cut the window in half to show the password information
+     * It calls another method that does the work.
+     * @param event this is the event information that javaFx sends.
+     */
+    @FXML
+    void MakeHalf(ActionEvent event) {GUIControllerLibrary.MakeHalf(event, spPane);}
+
+    /**
+     * This is going to handle importing the connection information for the database.
+     * @param event this is the event information that JavaFX sends.
+     */
     @FXML
     void HandlemnuImportDatabase(ActionEvent event) {
-        Stage newStage = null;
-        final FileChooser fc = new FileChooser();
-        File file;
-        fc.setTitle("Pick Database Connection Information file");
-        file = fc.showOpenDialog(newStage);
+        File file = filePicker("Pick Database Connection Information file","tab");
         if (file!= null) {
             data = DatabaseConnectionManagement.importConnectionData(file);
             DatabaseConnectionManagement.writeToFile(data);
         }
     }
 
+    /**
+     * This is going to start the importing of passwords, the passwords have to be in a
+     * command seperated file or a tab delimited file or it will fail.
+     * Variables:
+     *      file - this is the file that we are trying to import data from
+     *      extention - this is the files exention so we know what type of file it is.
+     * @param event this is the event information that JavaFX sends.
+     */
+    @FXML
+    void ImportPasswords(ActionEvent event){
+        File file = filePicker("Pick a file Containing Passwords","tab/csv");
+        String extention;
+        if (file!=null){
+            extention = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf(".")+1);
+            System.out.println(extention);
+            PasswordManagementMethods.readFile(file, extention);
+
+        }
+    }
+
+    /**
+     * this is the method that is going to handle choosing the file
+     * @return the file
+     */
+    public File filePicker(String title, String type){
+        //TODO need to work a way to delete the import file in for added security.
+        Stage newStage = null;
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter;
+        if(type.equals("tab/csv")){
+            extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt) | CSV Files (*.csv) | JSON Files (*.json)", "*.txt" , "*.csv", "*.json");
+        } else{
+            extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        }
+        fc.getExtensionFilters().add(extensionFilter);
+        File file;
+        fc.setTitle(title);
+        file = fc.showOpenDialog(newStage);
+        return file;
+    }
 
 }

@@ -21,7 +21,7 @@
                   <Menu mnemonicParsing="false" text="Import">
                     <items>
                       <MenuItem fx:id="mnuImportUsers" mnemonicParsing="false" text="Import Users" />
-                        <MenuItem fx:id="mnuImportPasswords" mnemonicParsing="false" text="Import Passwords" />
+                        <MenuItem fx:id="mnuImportPasswords" mnemonicParsing="false" onAction="#ImportPasswords" text="Import Passwords" />
                         <MenuItem fx:id="mnuImportDatabase" mnemonicParsing="false" onAction="#HandlemnuImportDatabase" text="Import Database Connection File" />
                     </items>
                   </Menu>
@@ -32,7 +32,7 @@
             <Menu fx:id="mnuTools" mnemonicParsing="false" text="Tools">
               <items>
                 <MenuItem fx:id="mnuPasswordGen" mnemonicParsing="false" text="Password Generator" />
-                  <MenuItem fx:id="mnuPasswordHIstory" mnemonicParsing="false" text="Password History" />
+                  <MenuItem fx:id="mnuPasswordHistory" mnemonicParsing="false" text="Password History" />
                   <MenuItem fx:id="mnuSettings" mnemonicParsing="false" text="Settings" />
                   <MenuItem fx:id="mnuUserMan" mnemonicParsing="false" text="User Management" />
                   <MenuItem fx:id="mnuGroupMan" mnemonicParsing="false" text="Group Management" />

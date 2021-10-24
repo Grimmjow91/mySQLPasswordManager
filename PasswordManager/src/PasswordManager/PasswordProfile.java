@@ -1,5 +1,7 @@
 package PasswordManager;
 
+import java.io.Serializable;
+
 /**
  * File Name:PasswordProfile.java
  * @author Nathan Premo
@@ -18,13 +20,14 @@ package PasswordManager;
  *  strNotes - this is going to hold a string of any notes
  *      that might be saved about the password object
  */
-public class PasswordProfile {
-     private String intPasswordID;
+public class PasswordProfile implements Serializable {
+    private static final long serialVersionUID = 1465744587697948685L;
      private String strName;
      private String strPassword;
      private String strLogin;
      private String strWebsite;
-     private StringBuilder strbNotes;
+     private String strEmail;
+     private String strbNotes;
 
     /**
      * This is just a generic constructor to make a blank password
@@ -39,41 +42,24 @@ public class PasswordProfile {
      * this is the standard constructor for the password object
      * if the note section of the login section is empty just pass
      * it a empty string
-     * @param intPasswordID - this is the ID of the Password If you are importing password
-     *                      to be uploaded to the database this will be null.
-     * @param strName - this is the name of the password
+     * @param strName - this is the name of the password, it must be unqiue
      * @param strPassword - this is the password for the account
-     * @param strLogin - this is the login if it is different than the email
+     * @param strLogin - this is the login if it isn't different than the email
      *                 if you don't have one send an empty string.
      * @param strWebsite - this is the website URL If there isn't one
      *                   just send an empty string
      * @param strNotes - this is for the note regarding the password. If
      *                 you don't have any just send an empty string.
      */
-    public PasswordProfile(String intPasswordID, String strName, String strPassword, String strLogin, String strWebsite, String strNotes) {
-        this.intPasswordID = intPasswordID;
+    public PasswordProfile(String strName, String strPassword, String strLogin, String strEmail, String strWebsite, String strNotes) {
+        this.strEmail = strEmail;
         this.strName = strName;
         this.strPassword = strPassword;
         this.strLogin = strLogin;
         this.strWebsite = strWebsite;
-        this.strbNotes.append(strNotes);
+        this.strbNotes = strNotes;
     }
 
-    /**
-     * This returns the passwordID
-     * @return intPasswordID
-     */
-    public String getIntPasswordID() {
-        return intPasswordID;
-    }
-
-    /**
-     * This is going to set the password ID
-     * @param intPasswordID this is the ID of the Password in the database
-     */
-    public void setIntPasswordID(String intPasswordID) {
-        this.intPasswordID = intPasswordID;
-    }
 
     /**
      * This is going to return the password name
@@ -153,7 +139,7 @@ public class PasswordProfile {
      * @return strNotes
      */
     public String getStrbNotes() {
-        return strbNotes.toString();
+        return strbNotes;
     }
 
     /**
@@ -162,11 +148,15 @@ public class PasswordProfile {
      *                 are adding to the notes
      */
     public void setStrbNotes(String strNotes) {
-        this.strbNotes.append(strbNotes);
+        this.strbNotes = strbNotes;
     }
 
-    public void deleteNotes(String toDelete){
+    public String getStrEmail() {
+        return strEmail;
+    }
 
+    public void setStrEmail(String strEmail) {
+        this.strEmail = strEmail;
     }
 
 } //end of class

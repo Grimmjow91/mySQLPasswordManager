@@ -10,24 +10,22 @@ import java.util.ArrayList;
  *  all the passwords. It is using a HashMap.
  *  Variables:
  *  Passwords - this is the Hashmap of the passwords the Key is the name
- *  *  of the password and the value is the password object.
+ *    of the password and the value is the password object.
  */
 
 public class PasswordCollection {
-    private HashMap<String, PasswordProfile> Passwords;
+    private HashMap<String, PasswordProfile>  Passwords;
 
     /**
      * This is the basic constructor to make the
      * HashMap
      */
     public PasswordCollection() {
-
+        Passwords = new HashMap<String, PasswordProfile>();
     }
 
     /**
      * this is the method that is going to add a password to the HashMap
-     * @param intPasswordID - this is the ID of the Password If you are importing password
-     *                      to be uploaded to the database this will be null.
      * @param strName - this is the name of the password
      * @param strPassword - this is the password for the account
      * @param strLogin - this is the login if it is different than the email
@@ -37,10 +35,10 @@ public class PasswordCollection {
      * @param strNotes - this is for the note regarding the password. If
      *                 you don't have any just send an empty string.
      */
-    public void addPassword(String intPasswordID, String strName, String strPassword,
-                       String strLogin, String strWebsite, String strNotes) {
-        Passwords.put(strName, new PasswordProfile(intPasswordID, strName, strPassword,
-                strLogin, strWebsite, strNotes));
+    public void addPassword(String strName, String strPassword,
+                       String strLogin, String strEmail, String strWebsite, String strNotes) {
+        Passwords.put(strName, new PasswordProfile(strName, strPassword,
+                strLogin, strEmail,strWebsite, strNotes));
     }
 
     /**
@@ -58,9 +56,7 @@ public class PasswordCollection {
      */
     public PasswordProfile findPassword(String PasswordName) {
          PasswordProfile password = null;
-        if (Passwords.containsKey(PasswordName)) {
-            password = Passwords.get(PasswordName);
-        }
+        if (Passwords.containsKey(PasswordName)) password = Passwords.get(PasswordName);
         return password;
     }
 

@@ -1,8 +1,0 @@
-        try{
-            Connection con = DriverManager.getConnection(this.URL + this.DatabaseName, this.user, this.pass);
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select * from students");
-            con.close();
-        }catch (Exception ex){
-            System.out.println(ex.toString());
-        }

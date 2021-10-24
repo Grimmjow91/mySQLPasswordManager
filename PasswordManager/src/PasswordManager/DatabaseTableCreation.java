@@ -11,6 +11,11 @@ import javax.xml.crypto.Data;
 
 public class DatabaseTableCreation {
 
+    /**
+     * this is the method that sets up the database.
+     * First it makes sure there are no tables and then it makes the tables.
+     * @param db this is the database connection object.
+     */
     public static void Setup(DatabaseConnectionInfo db){
         dropTables(db);
         makeTables(db);
@@ -74,7 +79,8 @@ public class DatabaseTableCreation {
     public static void MakePasswordsTable(DatabaseConnectionInfo db){
         String command = "create table PasswordsTable (\n" +
                 "\tTUID int AUTO_INCREMENT,\n" +
-                "\tPasswordObject varchar(300) not null,\n" +
+                "\tPasswordName varChar(100) not null, \n" +
+                "\tPasswordObject BLOB not null,\n" +
                 "    activeFlag boolean not null,\n" +
                 "    PRIMARY key(TUID)\n" +
                 ");";

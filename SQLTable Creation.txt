@@ -64,3 +64,15 @@ Create table PasswordUserTable(
     FOREIGN key(UserID) REFERENCES UsersTable(TUID),
     FOREIGN key(PasswordID) REFERENCES PasswordsTable(TUID)
 );
+
+
+
+drop code
+use dbhcmkz5ig1cer;
+drop table IF EXISTS PasswordUserTable;
+drop table IF EXISTS GroupPasswordsTable;
+drop table IF EXISTS ChangeTable;
+drop table IF EXISTS GroupUsersTable;
+drop table IF EXISTS PasswordsTable;
+drop table IF EXISTS GroupTable;
+drop table IF EXISTS UsersTable;
