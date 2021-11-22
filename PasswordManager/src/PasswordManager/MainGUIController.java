@@ -81,6 +81,11 @@ public class MainGUIController {
     @FXML
     private TextField txtArea;
 
+    //TODO fix how insecure this is. Need to make a graceful way to get this info
+    DatabaseConnectionInfo testing =
+            DatabaseConnectionManagement.decryptFile("NotThePermaPassword");
+
+
     /**
      * This method is going to make the password selection pane full to hind
      * the password information pane.
@@ -158,7 +163,9 @@ public class MainGUIController {
     @FXML
     void CreateUser(ActionEvent event) {
         CreateUserGUIDriver UserCreation = new CreateUserGUIDriver();
-        UserCreation.CreateWindow();
-        UserCreation.hidePasswordStuff(); //hide all the password stuff first.
+        UserCreation.CreateWindow(testing);
+
+
+
     }
 }
