@@ -102,7 +102,11 @@ import java.util.Scanner;
          File encryptedFile = new File("config.ebin");
          try {
              encryptedFile.createNewFile();
-             //TODO change the way the encyption settings are.
+             /**
+              * TODO change the way the encyption settings are.
+              *     Change the Encryption and decryption salts
+              */
+
              CryptoUtils.encrypt(new String(CryptoUtils.hashPassword(pass.toCharArray(),
                      ("testing").getBytes(StandardCharsets.UTF_8),1, 128)), file, encryptedFile);
          } catch (Exception e){

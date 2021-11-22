@@ -8,11 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class Main extends Application {
 
+
+public class Main extends Application {
+    public DatabaseConnectionInfo testing;
     @Override
     public void start(Stage primaryStage) throws Exception{
-   DatabaseConnectionInfo testing =
+   testing =
         DatabaseConnectionManagement.decryptFile("NotThePermaPassword");
 
         try {

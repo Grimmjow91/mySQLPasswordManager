@@ -60,6 +60,7 @@ public class PasswordManagementMethods{
      * @param file this is the json file that we are parsing.
      */
     public static void parseJson(File file){
+        //TODO make a note in the manual that JSON objects need to be under the "AUTHENTIFIANT" tag
         StringBuilder json = new StringBuilder();
         try{
             //the JSON library is expecting everything to be in a string so we have to read
@@ -126,21 +127,11 @@ public class PasswordManagementMethods{
                 bos.reset();
             }
             passQueue.setQueueLoadingFinished(true);
-
-
-
-
         } catch (Exception ex){
             ErrorMessage.infoBox("Error with object convertion", "Error in upload prep");
             ex.printStackTrace();
         }
-
     }
-
-
-
-
-
 }//end of class PasswordManagementMethods
 
 
