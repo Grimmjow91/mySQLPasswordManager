@@ -19,7 +19,7 @@ public class Main extends Application {
 
         try {
             System.out.println(testing.getDatabaseName());
-            DatabaseTableCreation.Setup(testing);
+           // DatabaseTableCreation.Setup(testing);
 
         }catch (Exception e){
             System.out.println(e.toString());

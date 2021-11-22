@@ -14,7 +14,7 @@
                   <Menu mnemonicParsing="false" text="New">
                     <items>
                     <MenuItem fx:id="mnuNewPassword" mnemonicParsing="false" text="New Password" />
-                      <MenuItem fx:id="mnuNewUser" mnemonicParsing="false" text="New User" />
+                      <MenuItem fx:id="mnuNewUser" mnemonicParsing="false" onAction="#CreateUser" text="New User" />
                         <MenuItem fx:id="mnuNewGroup" mnemonicParsing="false" text="New Group" />
                     </items>
                   </Menu>

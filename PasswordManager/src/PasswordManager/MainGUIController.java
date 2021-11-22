@@ -1,8 +1,12 @@
 package PasswordManager;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -10,7 +14,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 
-public class MainGUIController{
+public class MainGUIController {
     DatabaseConnectionInfo data;
     @FXML
     private MenuItem mnuPasswordGen;
@@ -147,4 +151,14 @@ public class MainGUIController{
         return file;
     }
 
+    /**
+     * This method is going to create the window for the user creation.
+     * @param event this is the event information that JavaFX sends.
+     */
+    @FXML
+    void CreateUser(ActionEvent event) {
+        CreateUserGUIDriver UserCreation = new CreateUserGUIDriver();
+        UserCreation.CreateWindow();
+        UserCreation.hidePasswordStuff(); //hide all the password stuff first.
+    }
 }
